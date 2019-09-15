@@ -1,0 +1,52 @@
+body {
+    background-color: gainsboro;
+}
+
+table, td {
+    border: 2px darkgoldenrod;
+    border-style: outset;
+    font-size: 16px;
+    font-family: "Courier New", serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+    background-color: sandybrown;
+
+}
+
+td {
+    width: 16px;
+    height: 16px;
+}
+
+#almafa {
+    border: 1px dotted red;
+    background-color: blanchedalmond;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 256px;
+    align-items: center;
+}
+
+.mezo {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    align-self: center;
+}
+
+.piros {
+    background-color: mediumvioletred;
+}
+
+.zold {
+    background-color: darkcyan;
+}
+
+.sarga {
+    background-color: sandybrown;
+}
