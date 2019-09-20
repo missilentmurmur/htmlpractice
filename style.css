@@ -27,7 +27,7 @@ td {
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
-    width: 256px;
+    width: auto;
     align-items: center;
 }
 

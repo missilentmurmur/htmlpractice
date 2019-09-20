@@ -1,85 +1,73 @@
-function handleMiddleClick(idx) {
-    return function(event) {
-        if(event.which === 2) {
-            console.log(event, event.target);
-            event.target.innerText = idx;
-            event.target.classList.remove('zold');
-            event.target.classList.remove('piros');
-            event.target.classList.add('sarga');
-        }
-    };
-}
-/*
-const handleMiddleClick = (idx) => (event) => {
-    if(event.which === 2) {
-        console.log(event, event.target);
-        event.target.innerText = idx;
-        event.target.classList.remove('zold');
-        event.target.classList.remove('piros');
-        event.target.classList.add('sarga');
-    } else {
+function generateMatrix(size) {
+    var matrix = [];
+    for (let i=0;i<size;i++) {
+        matrix[i] = [];
+        for (let j=0;j<size;j++) {
 
-    }
-};*/
-
-function printArray(arrayName){
-    var aLen = arrayName.length;
-    for(let i=0;i<aLen;i++) {
-        for(let j=0;j<aLen;j++) {
-            console.log(arrayName[i][j])
+            x = Math.floor(Math.random() + 0.5);
+            matrix[i][j] = x;
         }
     }
-    console.log("valami")
+    return matrix;
 }
-// var almafa = document.getElementById('almafa');
-// almafa.innerText = '123';
+
+function fillWithBombs(matrixToFill,numberOfBombs) {
+    var bombY = 0;
+    var bombX = 0;
+    var bombCounter = 0;
+    var len = matrixToFill.length;
+    var filledMatrix = generateMatrix(len+2);
+    for (let i=0;i<len+2;i++) {
+        for (let j=0;j<len+2;j++) {
+            filledMatrix[i][j] = 0;
+        }
+    }
+    while (bombCounter < numberOfBombs) {
+        bombX = Math.floor(Math.random()*(len)+1);
+        bombY = Math.floor(Math.random()*(len)+1);
+        if (filledMatrix[bombX][bombY]==0) {
+            filledMatrix[bombX][bombY] = 1;
+            bombCounter++;
+        }
+    }
+    /*for (let i=0;i<numberOfBombs;i++) {
+        bombX = Math.floor(Math.random()*(len+2));
+        bombY = Math.floor(Math.random()*(len+2));
+
+        filledMatrix[bombX][bombY]=1;
+    }*/
+    return filledMatrix;
+}
 
 document.addEventListener("DOMContentLoaded", function() {
-    /*
-    console.log('Your document is ready!');
-    var almafa = document.getElementById('almafa');
-
-    var elozoDoboz = almafa;
-    for(let i=0;i<5;i++) {
-        var doboz = document.createElement('div');
-        doboz.style.border = '1px dashed blue';
-        doboz.style.backgroundColor = 'fuchsia';
-        doboz.style.padding = '5px';
-        doboz.innerText = i;
-        elozoDoboz.append(doboz);
-        elozoDoboz = doboz;
-    }
-     */
-    var szamok = [[1,2,3],[4,5,6],[7,8,9]];
-    printArray(szamok);
     var almafa = document.getElementById('almafa');
     var mezo = [];
-    window.mezo = mezo;
-    for(let i=0;i<64;i++) {
-        mezo[i] = document.createElement('div');
-        mezo[i].classList.add('mezo');
-        almafa.append(mezo[i]);
+    var field = generateMatrix(6);
+    var bombsLayer = fillWithBombs(field,20);
 
-        mezo[i].addEventListener('click', function(event) {
-            if(event.ctrlKey) {
-                mezo[i].innerText = 'X';
-            } else {
-                mezo[i].innerText = i;
-            }
-            mezo[i].classList.remove('zold');
-            mezo[i].classList.remove('sarga');
-            mezo[i].classList.add('piros');
-        });
+    for(let i=0;i<bombsLayer.length;i++) {
+        for(let j=0;j<bombsLayer.length;j++) {
+            console.log(i,j, bombsLayer[i][j]);
+        }
 
-        mezo[i].addEventListener('auxclick', handleMiddleClick(i));
-
-        mezo[i].addEventListener('contextmenu', function(ev) {
-            ev.preventDefault();
-            mezo[i].innerText = i;
-            mezo[i].classList.remove('piros');
-            mezo[i].classList.remove('sarga');
-            mezo[i].classList.add('zold');
-        });
     }
+    for(let i=1;i<bombsLayer.length-1;i++) {
+        for(let j=1;j<bombsLayer.length-1;j++) {
+            console.log(i,j, bombsLayer[i][j]);
+        }
+
+    }
+
+    for(let i=1;i<bombsLayer.length-1;i++) {
+        mezo[i] = document.createElement('div');
+        almafa.append(mezo[i]);
+        for(let j=1;j<bombsLayer.length-1;j++) {
+            mezo[i][j] = document.createElement('div');
+            mezo[i][j].classList.add('mezo');
+            mezo[i].append(mezo[i][j]);
+            mezo[i][j].innerText = bombsLayer[i][j];
+        }
+
+    };
 
 });
