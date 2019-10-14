@@ -22,21 +22,32 @@ td {
 }
 
 #almafa {
-    border: 1px dotted red;
-    background-color: blanchedalmond;
+    background-color: olive;
     padding: 5px;
-    display: flex;
-    flex-wrap: wrap;
     width: auto;
     align-items: center;
+    align-self: center;
 }
 
-.mezo {
+.cell {
+    display: table-cell;
     width: 30px;
     height: 30px;
-    border: 1px solid black;
+    border: 3px goldenrod;
+    border-style: outset;
     text-align: center;
-    align-self: center;
+    vertical-align: middle;
+
+}
+
+.table {
+    display: table;
+    border: 4px goldenrod;
+    border-style: outset;
+}
+
+.row {
+    display: table-row;
 }
 
 .piros {
@@ -49,4 +60,58 @@ td {
 
 .sarga {
     background-color: sandybrown;
+}
+
+.revealed {
+    border-style: inset;
+    font-family: "Courier 10 Pitch", sans-serif;
+}
+
+.flagged {
+    background-color: black;
+}
+
+.neutral {
+    background-color: white;
+}
+
+.bomb {
+    background-color: red;
+    pointer-events:none;
+}
+
+.zero {
+    color: midnightblue;
+}
+
+.one {
+    color: darkblue;
+}
+
+.two {
+    color: blue;
+}
+
+.three {
+    color: darkcyan;
+}
+
+.four {
+    color: mediumseagreen;
+}
+
+.five {
+    color: green;
+}
+
+.six {
+    color: darkolivegreen;
+}
+
+.seven {
+    color: saddlebrown;
+}
+
+.eight {
+    color: darkred;
 }
